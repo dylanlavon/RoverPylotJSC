@@ -12,7 +12,7 @@ Since the base repo for this project is quite old and out of use, Python 2.7 mus
 
 ### Requisite Plug-Ins
 RoverPylot requires pygame, numpy, and opencv-python. 
-First download a pip installer from the following link: https://bootstrap.pypa.io/get-pip.py
+I would recommend following this tutorial here for installing Python2.7 and pip: https://www.youtube.com/watch?v=lpKJHUPTjmk
 
 Then install pip in the folder in the Python 2.7 path: `Python27\Scripts\`.
 
