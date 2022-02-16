@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.916
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "RoverPylotAtJSC", "RoverPylotAtJSC\RoverPylotAtJSC.pyproj", "{BE5899FC-2B2E-42F4-B2F8-3C862BA57DF7}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "RoverPylotJSC", "RoverPylotAtJSC\RoverPylotJSC.pyproj", "{BE5899FC-2B2E-42F4-B2F8-3C862BA57DF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
