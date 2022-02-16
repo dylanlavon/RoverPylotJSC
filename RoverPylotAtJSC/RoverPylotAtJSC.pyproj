@@ -1,0 +1,67 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>be5899fc-2b2e-42f4-b2f8-3c862ba57df7</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>ps3rover20.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>RoverPylotAtJSC</Name>
+    <RootNamespace>RoverPylotAtJSC</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="controller.py" />
+    <Compile Include="ps3rover20.py" />
+    <Compile Include="rover20battery.py" />
+    <Compile Include="rover\adpcm.py" />
+    <Compile Include="rover\blowfish.py" />
+    <Compile Include="rover\byteutils.py" />
+    <Compile Include="rover\__init__.py" />
+    <Compile Include="setup.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".vs\" />
+    <Folder Include=".vs\MatlabControl-master\" />
+    <Folder Include=".vs\MatlabControl-master\v16\" />
+    <Folder Include=".vs\RoverPylotJSC\" />
+    <Folder Include=".vs\RoverPylotJSC\v16\" />
+    <Folder Include="rover\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".vs\MatlabControl-master\v16\.suo" />
+    <Content Include=".vs\ProjectSettings.json" />
+    <Content Include=".vs\RoverPylotJSC\v16\.suo" />
+    <Content Include=".vs\slnx.sqlite" />
+    <Content Include=".vs\VSWorkspaceState.json" />
+    <Content Include="LICENSE.md" />
+    <Content Include="README.md" />
+    <Content Include="rover20.pcm" />
+    <Content Include="rover20.png" />
+    <Content Include="rover\adpcm.pyc" />
+    <Content Include="rover\blowfish.pyc" />
+    <Content Include="rover\byteutils.pyc" />
+    <Content Include="rover\__init__.pyc" />
+    <Content Include="tmp.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
