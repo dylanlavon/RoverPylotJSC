@@ -23,9 +23,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="controller.py" />
-    <Compile Include="test.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="ps3rover20.py" />
     <Compile Include="rover20battery.py" />
     <Compile Include="rover\adpcm.py" />
