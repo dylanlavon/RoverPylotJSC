@@ -29,11 +29,9 @@ def checkIfButtonDown():
             return True
         elif event.type == pygame.JOYBUTTONUP:
             return False
-            
-
-# Main Game Loop
-while done == False:
     
+
+def controllerMaster():
     while checkIfButtonDown():
         break
     if(myController.get_button(A) == PRESSED):
@@ -60,4 +58,7 @@ while done == False:
         print("Right tread moving backwards.")
     elif(myController.get_axis(RIGHT_STICK_VERT) < -DRIFT_ADJUST):
         print("Right tread moving forwards.")
-    
+
+# Main Game Loop
+while done == False:
+    controllerMaster()

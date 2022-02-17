@@ -17,31 +17,28 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 '''
 
-# You may want to adjust these buttons for your own controller
-BUTTON_LIGHTS      = 2  # Square button toggles lights
-BUTTON_STEALTH     = 1  # Circle button toggles stealth mode
-BUTTON_CAMERA_UP   = 3  # Triangle button raises camera
-BUTTON_CAMERA_DOWN = 0  # X button lowers camera
+# Declare Button Constants (for XBOX360 Controller)
+A = 0
+B = 1
+X = 2
+Y = 3
+LEFT_STICK_VERT = 1
+RIGHT_STICK_VERT = 3
+DRIFT_ADJUST = .05
+PRESSED = 1
 
 # Avoid button bounce by enforcing lag between button events
 MIN_BUTTON_LAG_SEC = 0.1
 
-# Avoid close-to-zero values on axis
-MIN_AXIS_ABSVAL    = 0.01
 
-
-
-
+# Import necessary modules
 from rover import Rover20
-
 import time
 import pygame
 import sys
 import signal
+#import controller
 from pygame.locals import *
-
-KEY_LIGHTS      = pygame.K_q  # Square button toggles lights
-KEY_STEALTH     = pygame.K_e  # Circle button toggles stealth mode
 
                                    
 # Supports CTRL-C to override threads
@@ -53,10 +50,9 @@ def _signal_handler(signal, frame):
 try:
     import cv2
 except:
-
     cv2 = None
 
-    # Rover subclass for PS3 + OpenCV
+# Begin Rover subclass for 360 + OpenCV ####################################################################################################
 class PS3Rover(Rover20):
 
     def __init__(self):
@@ -66,34 +62,32 @@ class PS3Rover(Rover20):
         self.quit = False
 
         pygame.init()
+
         # Set up controller using PyGame
         try:
-            pygame.display.init()
+            pygame.init()
             pygame.joystick.init()
             self.controller = pygame.joystick.Joystick(0)
             self.controller.init()
-            self.controll = True
+            self.usingController = True
             print("Using Controller")
 
         # Use Keyboard
         except:
-            # pygame.display.set_mode((600,600),1,16)
-
-            # pygame.display.init()
-            self.controll = False
+            self.usingController = False
             self.treadFloat = [float(0),float(0)]
             self.treadstep = .5 # float value for rate of change
             self.changer = {
                 -1: self.stop,
-                119: self.w,   # move forward
-                97: self.a,    # move left
-                115: self.s,   # move back
-                100: self.d,   # move right
-                113: self.q,   # toggle lights WIP
-                101: self.e,   # toggle night vision WIP
-                103: self.g,   # move camera down
-                116: self.t,   # move camera up
-                27: self.esc,   # close program
+                119: self.moveForward,   # move forward
+                97: self.turnLeft,    # move left
+                115: self.moveBackward,   # move back
+                100: self.turnRight,   # move right
+                113: self.toggleLights,   # toggle lights WIP
+                101: self.toggleStealth,   # toggle night vision WIP
+                103: self.moveCameraDown,   # move camera down
+                116: self.moveCameraUp,   # move camera up
+                27: self.shutDown,   # close program
             }
             print("Using Keyboard")
 
@@ -103,46 +97,17 @@ class PS3Rover(Rover20):
         self.stealthIsOn = False
 
         # Tracks button-press times for debouncing
-        self.lastButtonTim1e = 0
+        self.lastButtonTime = 0
 
-        # Try to create OpenCV named window
-        #try:
-            #if cv2:
-                #cv2.namedWindow(self.wname, cv2.CV_WINDOW_AUTOSIZE)
-            #else:
-                #pass
-        #except:
-            #pass
 
-        self.pcmfile = open('rover20.pcm', 'w')
         Rover20.__init__(self)
-
-    # Automagically called by Rover class
-    def processAudio(self, pcmsamples, timestamp_10msec):
-
-        for samp in pcmsamples:
-            self.pcmfile.write('%d\n' % samp)
 
     # Automagically called by Rover class
     def processVideo(self, jpegbytes, timestamp_10msec):
         # Update controller events
-        if self.controll:
+        if self.usingController:
             pygame.event.pump()
-            # Toggle lights
-            self.lightsAreOn  = self.checkButton(self.lightsAreOn, KEY_LIGHTS, self.turnLightsOn, self.turnLightsOff)
-
-            # Toggle night vision (infrared camera)
-            self.stealthIsOn = self.checkButton(self.stealthIsOn, KEY_STEALTH, self.turnStealthOn, self.turnStealthOff)
-            # Move camera up/down
-            if self.controller.get_button(BUTTON_CAMERA_UP):
-                self.moveCameraVertical(1)
-            elif self.controller.get_button(BUTTON_CAMERA_DOWN):
-                self.moveCameraVertical(-1)
-            else:
-                self.moveCameraVertical(0)
-
-            # Set treads based on axes
-            self.setTreads(self.axis(1), self.axis(3))
+            print("CONTROLLERRRR")
         else:
             keyb = cv2.waitKey(1)
             try:
@@ -152,29 +117,6 @@ class PS3Rover(Rover20):
             self.setTreads(self.treadFloat[0], self.treadFloat[1])
 
 
-
-        """if keyb[pygame.K_ESCAPE]:
-                print("donzo")
-                self.quit = True
-
-            print(keyb[pygame.K_LSHIFT])
-            # Toggle lights
-            # print(pygame.key.get_pressed(pygame.K_LSHIFT))
-            self.lightsAreOn  = self.checkKey(self.lightsAreOn, KEY_LIGHTS, keyb, self.turnLightsOn, self.turnLightsOff)
-
-            # Toggle night vision (infrared camera)
-            self.stealthIsOn = self.checkKey(self.stealthIsOn, KEY_STEALTH, keyb, self.turnStealthOn, self.turnStealthOff)
-            # Move camera up/down
-            if keyb[KEY_CAMERA_UP]:
-                self.moveCameraVertical(1)
-            elif keyb[KEY_CAMERA_DOWN]:
-                self.moveCameraVertical(-1)
-            else:
-                self.moveCameraVertical(0)
-
-            # Set treads based on axes
-            a = self.WASD(keyb)
-            self.setTreads(a[0],a[1])"""
         # Display video image if possible
         try:
             if cv2:
@@ -228,7 +170,11 @@ class PS3Rover(Rover20):
             self.treadFloat[1] -= self.treadstep
         self.moveCameraVertical(0)
 
-    def a(self):
+        # a
+
+    # Turn treads to turn rover left
+    def turnLeft(self):
+        print("Calling turnLeft")
         if self.treadFloat[0] > -1.0+self.treadstep:
             self.treadFloat[0] -= 2 * self.treadstep
         elif self.treadFloat[0] == -1.0+self.treadstep:
@@ -240,7 +186,10 @@ class PS3Rover(Rover20):
             self.treadFloat[1] += self.treadstep
         self.moveCameraVertical(0)
 
-    def w(self):
+
+    # Turn treads to move rover forward
+    def moveForward(self):
+        print("Calling moveForward")
         if self.treadFloat[0] < 1.0 - self.treadstep:
             self.treadFloat[0] += 2 * self.treadstep
         elif self.treadFloat[0] == 1.0 - self.treadstep:
@@ -252,8 +201,10 @@ class PS3Rover(Rover20):
             self.treadFloat[1] += self.treadstep
         self.moveCameraVertical(0)
 
-    def d(self):
-        print(self.treadFloat[0], self.treadFloat[1])
+
+    # Turn treads to turn rover right
+    def turnRight(self):
+        print("Calling turnRight")
         if self.treadFloat[0] < 1.0 - self.treadstep:
             self.treadFloat[0] += 2 * self.treadstep
         elif self.treadFloat[0] == 1.0 - self.treadstep:
@@ -265,7 +216,10 @@ class PS3Rover(Rover20):
             self.treadFloat[1] -= self.treadstep
         self.moveCameraVertical(0)
 
-    def s(self):
+
+    # Turn treads to move rover backwards
+    def moveBackward(self):
+        print("Calling moveBackward")
         if self.treadFloat[0] > -1.0 + self.treadstep:
             self.treadFloat[0] -= 2 * self.treadstep
         elif self.treadFloat[0] == -1.0 + self.treadstep:
@@ -277,36 +231,43 @@ class PS3Rover(Rover20):
             self.treadFloat[1] -= self.treadstep
         self.moveCameraVertical(0)
 
-    def e(self):
-        # Toggle night vision (infrared camera)
-        print("e has been called")
+
+    # Toggle stealth mode (infrared camera)
+    def toggleStealth(self):
+        print("Calling toggleStealth")
         if self.stealthIsOn == False:
             self.turnStealthOn()
             self.stealthIsOn = True
         elif self.stealthIsOn == True:
             self.turnStealthOff()
             self.stealthIsOn = False
-        print("e, should toggle night vision")
 
-    def q(self):
-        print("q has been called")
+
+    # Toggle green lights
+    def toggleLights(self):
+        print("Calling toggleLights")
         if self.lightsAreOn == False:
             self.turnLightsOn()
             self.lightsAreOn = True
         elif self.lightsAreOn == True:
             self.turnLightsOff()
             self.lightsAreOn = False
-        print("q, toggle lights")
 
-    def g(self):
+
+    # Move camera down
+    def moveCameraDown(self):
+        print("Calling moveCameraDown")
         self.moveCameraVertical(-1)
-        print("g, moving camera down")
 
-    def t(self):
+
+    # Move camera up
+    def moveCameraUp(self):
+        print("Calling moveCameraUp")
         self.moveCameraVertical(1)
-        print("t, moving camera up")
 
-    def esc(self): #Closes program
+
+    # Close the program and turn of lights / stealth mode if enabled
+    def shutDown(self):
         print("Closing Program")
         rover.turnLightsOff()
         rover.lightsAreOn = False
@@ -315,50 +276,6 @@ class PS3Rover(Rover20):
         sys.exit()
         
 
-    """def WASD(self, keyb):
-        w = 0
-        a = 0
-        s = 0
-        d = 0
-        if keyb[pygame.K_w]:
-            w = 1
-        else:
-            w = 0
-        if keyb[pygame.K_a]:
-            a = 1
-        else:
-            a = 0
-        if keyb[pygame.K_s]:
-            s = 1
-        else:
-            s = 0
-        if keyb[pygame.K_d]:
-            d = 1
-        else:
-            d = 0
-
-        wasd = [w,a,s,d]
-
-        if wasd == [0,0,0,0]:
-            return 0, 0
-        elif wasd == [1,0,0,0] or wasd == [1,1,0,1]:
-            return 1, 1
-        elif wasd == [1,1,0,0]:
-            return 0,1
-        elif wasd == [1,0,0,1]:
-            return 1,0
-        elif wasd == [0,1,0,0]:
-            return -1,1
-        elif wasd == [0,0,0,1]:
-            return 1,-1
-        elif wasd == [0,0,1,0]:
-            return -1,-1
-        elif wasd == [0,1,1,0]:
-            return 0,-1
-        elif wasd == [0,0,1,1]:
-            return -1,0
-        else:
-            return 0,0"""
 
     def checkKey(self,flag,keyID,keypresses,onRoutine=None,offRoutine=None):
         if keypresses[keyID]:
