@@ -76,7 +76,7 @@ Copyright and licensing information can be found in the header of each source fi
 Please <a href="mailto:simon.d.levy@gmail.com">contact</a> the original author with any questions or 
 suggestions."# RoverPylotJSC" 
  
-<h3>Credits</h3>
-Original Author - <a href="https://github.com/simondlevy/RoverPylot/">simondlevy</a>
+<h2>Credits</h2>
+**Original Author -** <a href="https://github.com/simondlevy/RoverPylot/">simondlevy</a>
 
-Modification and Further Development - JSC Spring Interns <a href="https://www.linkedin.com/in/dylan-britain-962046167/">Dylan Britain</a> and <a href="https://www.linkedin.com/in/mugdha-bhagavatula/">Mugdha Bhagavatula</a>
+**Modification and Further Development - **JSC Spring Interns <a href="https://www.linkedin.com/in/dylan-britain-962046167/">Dylan Britain</a> and <a href="https://www.linkedin.com/in/mugdha-bhagavatula/">Mugdha Bhagavatula</a>
