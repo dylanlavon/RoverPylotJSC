@@ -1,6 +1,7 @@
 # RoverPylotJSC
 This program allows users to control the Brookstone Rover 2.0 from their PC.
 
+![rover](https://user-images.githubusercontent.com/44561221/169404097-fadc85a7-acec-4d48-b8c7-b232264bc758.jpg)
 
 # Start the program with the ps3rover20.py script.
 
@@ -51,16 +52,6 @@ P3 controller you may have to do some adjusting of
 the axis and button settings at the top of the script to make it work.
 
 
-
-<table>
-
-<tr>
-
-<td><image height=300 align="left" src="rover20.png"></td>
-
-</tr>
-
-</table>
 
 
 
