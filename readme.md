@@ -36,23 +36,13 @@ program allowing you to control the Brookstone
 <a href="http://www.amazon.com/Rover-2-0-App-Controlled-Wireless-Tank/dp/B0093285XK">
 Rover 2.0 spy tank</a> from your laptop or PC. To get started, you should
 get hold of a 
-Rover 2.0 and a Playstation PS3 controller or clone, and install the repository
+Rover 2.0 and install the repository
 (<b>sudo python setup.py install</b> for Linux users), as well as
-<a href="http://pygame.org/news.html">PyGame</a> and either <a href="http://opencv.org/">OpenCV</a> for Python
-(Rover 2.0) or <a href="https://www.ffmpeg.org/">ffmpeg</a> (Rover Revolution). 
+<a href="http://pygame.org/news.html">PyGame</a> and <a href="http://opencv.org/">OpenCV</a> for Python
 Join the Rover's ad-hoc wifi network from your computer.
-Then run either the <b>ps3rover20.py</b> or <b>ps3revolution.py</b> script from the repository.  This script will
+Then run the <b>ps3rover20.py</b> script from the repository.  This script will
 allow you to drive the Rover around and watch its streaming video, as shown
-<a href="http://www.youtube.com/watch?v=AsRleC1ediU">here</a>.  I have
-run this script successfully on Linux (Ubuntu),
-but I can't vouch for what happens on Windows or OS X, on which Python packages
-become much trickier. Remember, the Rover 20 is a tank, so you
-control it by moving the left and right sticks back and forth. If you used an inexpensive clone of the
-P3 controller you may have to do some adjusting of
-the axis and button settings at the top of the script to make it work.
-
-
-
+<a href="http://www.youtube.com/watch?v=AsRleC1ediU">here</a>.  
 
 
 Once you're up and running with the <b>ps3rover.py</b> script, look at its 
@@ -65,8 +55,6 @@ this blog post</a> shows a clever application using Skype.
 
 
 <h2>Known issues</h2>
-
-
 
 <ol>
 
