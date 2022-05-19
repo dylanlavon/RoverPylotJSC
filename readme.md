@@ -13,43 +13,19 @@ Since the base repo for this project is quite old and out of use, Python 2.7 mus
 
 ### Requisite Plug-Ins
 RoverPylot requires pygame, numpy, and opencv-python. 
-I would recommend following this tutorial here for installing Python2.7 and pip: https://www.youtube.com/watch?v=lpKJHUPTjmk
+I would recommend following this tutorial here for installing Python2.7 and <a href="https://www.youtube.com/watch?v=lpKJHUPTjmk">pip:<a> 
 Additionally, to install opencv, you will need to run the following command: python -m pip install opencv-python==4.2.0.32
 
 Then install pip in the folder in the Python 2.7 path: `Python27\Scripts\`.
 
 Use "pip i" to install 'pygame,' 'numpy,' and 'opencv-python' using PyPi.
- 
 
-RoverPylot
-==========
-
-Pilot the Brookstone Rover 2.0 from Python
-
-<h2>Instructions</h2>
-
-This repository contains a Python API and demo
-program allowing you to control the Brookstone 
-<a href="http://www.amazon.com/Rover-2-0-App-Controlled-Wireless-Tank/dp/B0093285XK">
-Rover 2.0 spy tank</a> from your laptop or PC. To get started, you should
-get hold of a 
-Rover 2.0 and install the repository
-(<b>sudo python setup.py install</b> for Linux users), as well as
-<a href="http://pygame.org/news.html">PyGame</a> and <a href="http://opencv.org/">OpenCV</a> for Python
-Join the Rover's ad-hoc wifi network from your computer.
-Then run the <b>ps3rover20.py</b> script from the repository.  This script will
-allow you to drive the Rover around and watch its streaming video, as shown
-<a href="http://www.youtube.com/watch?v=AsRleC1ediU">here</a>.  
-
-
-Once you're up and running with the <b>ps3rover.py</b> script, look at its 
-source code (and run pydoc on <b>rover.py</b>) to see how RoverPylot works and
-how you can modify it to do other interesting things.
-<a href="http://isgroupblog.blogspot.com/2013/09/how-i-hacked-brookstone-rover-20.html">
-This blog post</a> explains how I hacked the Rover 2.0, and 
-<a href="http://mas802.wordpress.com/2014/04/01/brookstone-rover-2-0-skype-client/">
-this blog post</a> shows a clever application using Skype.
-
+### Running the Application
+<ol>
+<li>Once the plugins are all situated, begin by connecting to the rover's ad hoc network created after turning on the rover. 
+<li>Next, open the <b>ps3rover.py</b> script, and verify or edit your control settings.
+<li>You can launch the application and begin controlling your rover by running the <b>ps3rover.py</b> script.
+</ol>
 
 <h2>Known issues</h2>
 
@@ -68,15 +44,12 @@ and <tt>DELAY_SEC</tt> parameters at the top of the script.
 <li> As of now, the rover is still quite sluggish in terms of response time. Don't be suprised if the rover doesn't move consistently. 
 </ol>
 
-
-
-<h2>Copyright and licensing</h2>
-
-Copyright and licensing information can be found in the header of each source file. 
-Please <a href="mailto:simon.d.levy@gmail.com">contact</a> the original author with any questions or 
-suggestions."# RoverPylotJSC" 
  
 <h2>Credits</h2>
-**Original Author -** <a href="https://github.com/simondlevy/RoverPylot/">simondlevy</a>
+<b>Original Author -</b> <a href="https://github.com/simondlevy/RoverPylot/">simondlevy</a>
 
-**Modification and Further Development - **JSC Spring Interns <a href="https://www.linkedin.com/in/dylan-britain-962046167/">Dylan Britain</a> and <a href="https://www.linkedin.com/in/mugdha-bhagavatula/">Mugdha Bhagavatula</a>
+<b>Modification and Further Development -</b> JSC Spring 2022 Interns <a href="https://www.linkedin.com/in/dylan-britain-962046167/">Dylan Britain</a> and <a href="https://www.linkedin.com/in/mugdha-bhagavatula/">Mugdha Bhagavatula</a>
+
+ <h3>Copyright and Licensing</h3>
+
+Copyright and licensing information can be found in the header of each source file. 
