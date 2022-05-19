@@ -78,6 +78,9 @@ I couldn't find a Python package for decoding and displaying H.264 on the fly, s
 saves the video to a temporary file, which
 from which the script then reads.  You can tweak the performance of this setup by playing with the <tt>FRAMERATE</tt>
 and <tt>DELAY_SEC</tt> parameters at the top of the script.
+<li> The camera tends to get stuck when trying to pan up, likely just due to old hardware.
+<li> If you are having issues with dropped connection or cannot find the ad hoc network after turning on the rover, try replacing the batteries.
+<li> As of now, the rover is still quite sluggish in terms of response time. Don't be suprised if the rover doesn't move consistently. 
 </ol>
 
 
@@ -85,5 +88,5 @@ and <tt>DELAY_SEC</tt> parameters at the top of the script.
 <h2>Copyright and licensing</h2>
 
 Copyright and licensing information can be found in the header of each source file. 
-Please <a href="mailto:simon.d.levy@gmail.com">contact</a> me with any questions or 
+Please <a href="mailto:simon.d.levy@gmail.com">contact</a> the original author with any questions or 
 suggestions."# RoverPylotJSC" 
